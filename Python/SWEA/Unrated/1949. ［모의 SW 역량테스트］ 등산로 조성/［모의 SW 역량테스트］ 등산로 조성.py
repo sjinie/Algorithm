@@ -8,7 +8,8 @@ def find_peak(arr):
     return peaks
 
 
-def dfs(r, c, k_used, route_length, arr, visited, n, K):
+def dfs(r, c, k_used, route_length, arr, visited, K):
+    size = len(arr)
     max_length = route_length
     visited[r][c] = True
 
@@ -16,17 +17,17 @@ def dfs(r, c, k_used, route_length, arr, visited, n, K):
         nr = r + dr
         nc = c + dc
 
-        if not (0 <= nr < n and 0 <= nc < n) or visited[nr][nc]:
+        if not (0 <= nr < size and 0 <= nc < size) or visited[nr][nc]:
             continue
         # 이동불가
 
         if arr[nr][nc] < arr[r][c]:  # 높이가 낮을때
-            max_length = max(max_length, dfs(nr, nc, k_used, route_length + 1, arr, visited, n, K))
+            max_length = max(max_length, dfs(nr, nc, k_used, route_length + 1, arr, visited, K))
         elif (not k_used) and (arr[nr][nc] - K < arr[r][c]):
             original_height = arr[nr][nc]
             arr[nr][nc] = arr[r][c] - 1
             # 이동하려는 칸의 높이를 최대 K만큼 깎아서 현재 위치보다 낮게 만들 수 있다면, 현재 위치보다 1 낮게 만들고 이동
-            max_length = max(max_length, dfs(nr, nc, True, route_length + 1, arr, visited, n, K))
+            max_length = max(max_length, dfs(nr, nc, True, route_length + 1, arr, visited, K))
             arr[nr][nc] = original_height
             # 이동하고 높이 복구 (백트래킹)
     visited[r][c] = False
@@ -41,7 +42,7 @@ def explore(peaks, arr, K):
     max_length = 0
 
     for sr, sc in peaks:
-        max_length = max(max_length, dfs(sr, sc, False, 1, arr, visited, n, K))
+        max_length = max(max_length, dfs(sr, sc, False, 1, arr, visited, K))
 
     return max_length
 
