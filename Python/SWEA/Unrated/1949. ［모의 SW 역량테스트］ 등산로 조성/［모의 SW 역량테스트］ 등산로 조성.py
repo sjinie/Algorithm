@@ -1,17 +1,17 @@
 directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
 
 
-def find_peak(arr, N):
+def find_peak(arr):
     # 봉우리 좌표 찾기
     max_height = max(map(max, arr))
-    peaks = [(r, c) for r in range(N) for c in range(N) if arr[r][c] == max_height]
+    peaks = [(r, c) for r in range(len(arr)) for c in range(len(arr)) if arr[r][c] == max_height]
     return peaks
 
 
 def dfs(r, c, k_used, route_length, arr, visited, n, K):
     max_length = route_length
     visited[r][c] = True
-	# 상하좌우 이동
+
     for dr, dc in directions:
         nr = r + dr
         nc = c + dc
@@ -54,7 +54,7 @@ for test_case in range(1, T + 1):
     for _ in range(N):
         arr.append(list(map(int, input().split())))
 
-    peaks = find_peak(arr, N)
+    peaks = find_peak(arr)
     answer = explore(peaks, arr, K)
 
     print(f"#{test_case} {answer}")
