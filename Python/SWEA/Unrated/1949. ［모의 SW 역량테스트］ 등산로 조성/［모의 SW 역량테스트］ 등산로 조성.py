@@ -9,7 +9,6 @@ def find_peak(arr):
 
 
 def dfs(r, c, k_used, route_length, arr, visited, K):
-    size = len(arr)
     max_length = route_length
     visited[r][c] = True
 
@@ -17,7 +16,7 @@ def dfs(r, c, k_used, route_length, arr, visited, K):
         nr = r + dr
         nc = c + dc
 
-        if not (0 <= nr < size and 0 <= nc < size) or visited[nr][nc]:
+        if not (0 <= nr < len(arr) and 0 <= nc < len(arr)) or visited[nr][nc]:
             continue
         # 이동불가
 
