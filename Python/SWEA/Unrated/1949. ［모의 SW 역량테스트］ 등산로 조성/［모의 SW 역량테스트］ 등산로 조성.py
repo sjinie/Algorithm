@@ -36,8 +36,7 @@ def dfs(r, c, k_used, route_length, arr, visited, K):
 
 def explore(peaks, arr, K):
     # 모든 봉우리에서 탐색 시작
-    n = len(arr)
-    visited = [[False] * n for _ in range(n)]
+    visited = [[False] * len(arr) for _ in range(len(arr))]
     max_length = 0
 
     for sr, sc in peaks:
