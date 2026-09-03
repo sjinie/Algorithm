@@ -13,9 +13,11 @@ def postfix(formula):
 
 def postfix_cal(postfix_formula):
     result = 0
-    for i in range(length):
-        if postfix_formula[i] != '+':
-            result += int(postfix_formula[i])
+    formula = deque(postfix_formula)
+    while formula:
+        next = formula.popleft()
+        if next != '+':
+            result += int(next)
     return result
 
 T = 10
