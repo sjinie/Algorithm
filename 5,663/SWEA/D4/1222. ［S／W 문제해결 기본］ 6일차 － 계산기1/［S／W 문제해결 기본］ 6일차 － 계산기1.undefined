@@ -1,0 +1,27 @@
+from collections import deque
+
+def postfix(formula):
+    postfix_formula = "".join(formula.popleft())
+    temp = deque()
+    while(formula):
+        next = formula.popleft()
+        temp.append(next)
+        if next != "+":
+            postfix_formula += temp.pop()
+            postfix_formula += temp.pop()
+    return postfix_formula
+
+def postfix_cal(postfix_formula):
+    result = 0
+    for i in range(length):
+        if postfix_formula[i] != '+':
+            result += int(postfix_formula[i])
+    return result
+
+T = 10
+# 여러개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
+for test_case in range(1,T+1):
+    length = int(input())
+    formula = deque(input().strip())
+    answer = postfix_cal(postfix(formula))
+    print(f'#{test_case} {answer}')
