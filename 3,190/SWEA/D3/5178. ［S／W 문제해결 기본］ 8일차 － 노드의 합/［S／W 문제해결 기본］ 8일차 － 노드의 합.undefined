@@ -1,0 +1,20 @@
+T = int(input())
+
+
+def calculate(idx):
+    if idx > n:
+        return 0
+    if tree[idx] == 0:
+        tree[idx] = calculate(idx * 2) + calculate(idx * 2 + 1)
+    return tree[idx]
+
+
+# 여러개의 테스트 케이스가 주어지므로, 각각을 처리합니다.
+for test_case in range(1, T + 1):
+    n, m, l = map(int, input().split())
+    # 노드 개수 n, 리프 노드의  개수 m, 값을 출력할 노드 번호 l
+    tree = [0] * (n + 1)
+    for _ in range(m):
+        idx, value = map(int, input().split())
+        tree[idx] = value
+    print(f"#{test_case} {calculate(l)}")
