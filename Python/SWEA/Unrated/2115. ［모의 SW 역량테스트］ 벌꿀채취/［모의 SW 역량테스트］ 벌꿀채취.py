@@ -31,11 +31,12 @@ for test_case in range(1, T + 1):
     # 입력
 
     max_profit = 0
-    ssr_arr = []
+    profit = [[0]*(N-M+1) for _ in range(N)]
+    
 
     for r in range(N):
         for c in range(N-M+1):
-            ssr_arr.append(subset(arr[r][c:c+M],C))
+            profit[r][c] = subset(arr[r][c:c+M],C)
 
     # ssr_arr에는 각 위치에서 시작해서 M개의 꿀통 선택시 나온 조건부 최대 제곱합이 들어있음
     # column이 다르거나, 아니면 column이 같더라도 row가 달라야 안겹침
@@ -45,6 +46,6 @@ for test_case in range(1, T + 1):
                 for c2 in range(N-M+1):
                     if r1 == r2 and (c1 + M > c2 and c2 + M > c1):  # 겹치는 경우
                         continue
-                    max_profit = max(max_profit, ssr_arr[r1*(N-M+1)+c1] + ssr_arr[r2*(N-M+1)+c2])
+                    max_profit = max(max_profit, profit[r1][c1] + profit[r2][c2])
 
     print(f'#{test_case} {max_profit}')
