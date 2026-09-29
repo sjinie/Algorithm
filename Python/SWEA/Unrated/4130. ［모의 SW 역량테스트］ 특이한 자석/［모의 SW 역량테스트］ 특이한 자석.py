@@ -21,7 +21,7 @@ def turn_right(magnets, idx):
 
 
 def get_rotations(magnets, main, direction):
-    # 회전 전 상태를 기준으로 각 자석의 회전 방향만 결정한다.
+    # main 자석 기준으로 각 자석의 회전 방향을 계산
     rotations = [0] * 4
     rotations[main] = direction
 
@@ -63,7 +63,6 @@ T = int(input())
 for test_case in range(1, T + 1):
     k = int(input())
     magnets = [list(map(int, input().split())) for _ in range(4)]
-    rotated = [0, 0, 0, 0]
     orders = [list(map(int, input().split())) for _ in range(k)]
     score = solve(magnets, orders)
     print(f"#{test_case} {score}")
